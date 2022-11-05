@@ -1,0 +1,40 @@
+<mat-card class="example-card" infinite-scroll [infiniteScrollDistance]="scrollDistance"
+  [infiniteScrollUpDistance]="scrollUpDistance" [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDown()">
+  <ng-container *ngFor="let art of articles; let i=index">
+    <div class="post-outer">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{art?.author}}</mat-card-title>
+        <mat-card-subtitle> {{(showMore && selectedIndex==i) ? art?.description : art?.description | slice:0:50}} <span
+            *ngIf="!showMore">...</span>
+          <a href="javascript:;" *ngIf="(!showMore || selectedIndex!=i)" (click)="showMoreInfo(true,i)"
+            style="color: gray;">[more]</a>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src={{art?.urlToImage}} alt="News Image">
+      <mat-card-content>
+        <p>
+          {{(showContentMore && selectedIndex==i) ? art?.content : art?.content | slice:0:50}} <span
+            *ngIf="!showContentMore">...</span>
+          <a href="javascript:;" *ngIf="(!showContentMore || selectedIndex!=i)" (click)="showMoreContent(true,i)"
+            style="color: gray;">[more]</a>
+        </p>
+
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button class="primary-btt"> <img width="20" alt="news Logo"
+            src="../../assets/img/like.svg"></button>
+        <button mat-button class="primary-btt"><img width="20" alt="news Logo"
+            src="../../assets/img/share.svg"></button>
+      </mat-card-actions>
+    </div>
+  </ng-container>
+</mat-card>
+
+<div class="clearfix"></div>
+
+<!-- <div style="width: 200px;">
+<div *ngFor="let art of articles" >
+    {{art?.author}}
+</div>
+</div> -->
